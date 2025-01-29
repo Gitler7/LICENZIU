@@ -1,155 +1,132 @@
 <!DOCTYPE html>
 <html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Правила дорожнього руху серверу Kiev Rp(ПДР)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #ff0000;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        nav {
+            background: #333;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+        h2 {
+            color: #ff0000;
+        }
+        .rules ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .rules ul li {
+            background: #ffecec;
+            margin: 10px 0;
+            padding: 10px;
+            border-left: 5px solid #ff0000;
+        }
+        .contact-form input, .contact-form textarea, .contact-form button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .contact-form button {
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .contact-form button:hover {
+            background-color: #cc0000;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+    </style>
+</head>
 <body>
-    <div class="modal" id="modal">
-        <div class="modal-content">
-            <p>Щоб дізнатися, чи є ліцензія у гравця, введіть його username в поле пошуку та натисніть «ПЕРЕВІРИТИ».</p>
-            <button onclick="closeModal()">ОК</button>
-        </div>
-    </div>
-    <div class="title-container" style="display: flex; justify-content: center; align-items: center; width: 100%; margin-top: 20px;">
-        <div class="title" style="font-size: 24px; color: #b399ff; font-weight: bold; margin-right: 10px;">
-            KIEV RP
-        </div>
-        <div class="buttons">
-            <a href="" target="_blank" style="margin-left: 10px; text-decoration: none; background: #6a0dad; color: #fff; padding: 8px 15px; border-radius: 5px; transition: background 0.3s;">Tiktok</a>
-            <a href="" target="_blank" style="margin-left: 10px; text-decoration: none; background: #6a0dad; color: #fff; padding: 8px 15px; border-radius: 5px; transition: background 0.3s;">Telegram</a>
-        </div>
-    </div>
-    <p>
-    
-    </p>
-    <div class="container">
-        <div class="top-bar">
-            <div class="logo">Ліцензія на вогнепальну зброю</div>
-            <div class="buttons">
-                <a href="https://t.me/weaponlicense_bot">ОТРИМАТИ</a>
-            </div>
-        </div>
-        <div class="content">
-            <h1>Перевірка Ліцензії</h1>
-            <div class="search-box">
-                <input type="text" id="username" placeholder="Введіть username гравця" oninput="clearResults()">
-                <button onclick="checkLicense()">ПЕРЕВІРИТИ</button>
-            </div>
-            <div id="result" class="license-info" style="display: none;"></div>
-        </div>
-    </div>
 
-    <script>
-        function closeModal() {
-            document.getElementById('modal').style.display = 'none';
-        }
+<header>
+    <h1>Правила дорожнього руху серверу Kiev Rp (ПДР)</h1>
+    <p>Офіційні правила для безпечного пересування</p>
+</header>
 
-        const players = {
-            "Slava_Ykren": { licenseStatus: "Дійсна", licenseExpiry: "31.12.2025", workplace: "Засновник сервера", telegramId: "7286830883" },
-            "smol591": { licenseStatus: "Дійсна", licenseExpiry: "14.03.2025", workplace: "Мер", telegramId: "1370526859" },
-            "bodja150510": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Адміністратор сервера", telegramId: "1334371648" },
-            "K_PoPlove9473": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Адміністратор сервера", telegramId: "6014351539" },
-            "Yezh1lya": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Адміністратор сервера", telegramId: "5109532913" },
-            "Zoomsos123": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Адміністратор сервера", telegramId: "5339606531" },
-            "bratsmola": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Адміністратор сервера", telegramId: "7660823405" },
-            "olegh34": { licenseStatus: "Дійсна", licenseExpiry: "11.02.2025", workplace: "Охоронець суду", telegramId: "5007175515" },
-            "kajsfxbns": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Охоронець суду", telegramId: "8023376907" },
-            "SMAXS1313": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Суддя", telegramId: "6176705369" },
-            "Oleg1230o": { licenseStatus: "Дійсна", licenseExpiry: "13.02.2025", workplace: "Гравець", telegramId: "1608758641" },
-            "01234567890ua": { licenseStatus: "Дійсна", licenseExpiry: "18.02.2025", workplace: "Гравець", telegramId: "1028211294" },
-            "XxHA7AxX": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Суддя", telegramId: "1731530720" },
-            "Mr_Zver3000": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Суддя", telegramId: "6626655148" },
-            "MAXIM4IK12309": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Директор ДБР", telegramId: "6053516349" },
-            "Global20207": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Заступник Директора ДБР", telegramId: "1431122546" },
-            "cheater777_Yt": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник ДБР", telegramId: "5696745197" },
-            "Vaylet009": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник ДБР", telegramId: "5169521179" },
-            "Mixaul_petrovich1": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник ДБР", telegramId: "5493487232" },
-            "kingfogfok": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник ДБР", telegramId: "842515350" },
-            "arina_mike141": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник ДБР", telegramId: "7505928620" },
-            "artemMelnichenko2013": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник ДБР", telegramId: "5242336088" },
-            "Otto_octopu": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник ДБР", telegramId: "6110818100" },
-            "dannnnnnpro": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Голова СБС", telegramId: "2083562203" },
-            "Derick47846": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник СБС", telegramId: "8051973573" },
-            "difjkdjdjd": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник СБС", telegramId: "7213249534" },
-            "3cy_77781046": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник СБС", telegramId: "6370149052" },
-            "NeMo45765": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Охоронець банку", telegramId: "6002613929" },
-            "NAME_ABSOLUTE3": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Охоронець банку", telegramId: "5083373172" },
-            "eeeeyegeggegehux": { licenseStatus: "Дійсна", licenseExpiry: "20.02.2025", workplace: "Охоронець ювеліру", telegramId: "5599228299" },
-            "max12ua12": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Охоронець банку", telegramId: "7196451215" },
-            "VLAD_ERIK": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Охоронець банку", telegramId: "6938266310" },
-            "nazar1cyber2sportman": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Власник Е.С.Г «Сокіл»", telegramId: "6194910294" },
-            "evilmaka": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник Е.С.Г «Сокіл»", telegramId: "6260599741" },
-            "EH_WW1": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник Е.С.Г «Сокіл»", telegramId: "7944742105" },
-            "Sti4kyy": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник Е.С.Г «Сокіл»", telegramId: "5481499679" },
-            "firsunin2013": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник Е.С.Г «Сокіл»", telegramId: "5119828268" },
-            "Markito5518": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник Е.С.Г «Сокіл»", telegramId: "6408141542" },
-            "Pit_uk": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Охоронець ювеліру", telegramId: "7811050819" },
-            "pypsik_2309812": { licenseStatus: "Дійсна", licenseExpiry: "00.00.0000", workplace: "Гравець", telegramId: "6429626395" },
-            "Palamarka": { licenseStatus: "Дійсна", licenseExpiry: "23.02.2025", workplace: "Гравець", telegramId: "1902876079" },
-            "sigm4t1k": { licenseStatus: "Дійсна", licenseExpiry: "23.02.2025", workplace: "Гравець", telegramId: "5359199322" },
-        };
+<nav>
+    <a href="#basic">Загальні правила</a>
+    <a href="#signs">Дорожні знаки</a>
+    <a href="#penalties">Порушення та штрафи</a>
+    <a href="#contact">Контакти</a>
+</nav>
 
-        function checkLicense() { 
-    const username = document.getElementById('username').value.trim().toLowerCase();
-    const resultDiv = document.getElementById('result');
-    if (!username) {
-        resultDiv.innerHTML = `<p class="error">Введіть username гравця.</p>`;
-        resultDiv.style.display = 'block';
-        return;
-    }
+<div class="container">
+    <section id="basic" class="rules">
+        <h2>Загальні правила дорожнього руху</h2>
+        <ul>
+            <li>Водій повинен мати при собі посвідчення водія, страховку та техпаспорт.</li>
+            <li>Забороняється керування транспортним засобом у стані алкогольного сп'яніння.</li>
+            <li>Пішоходи мають перевагу на пішохідних переходах.</li>
+            <li>Не можна перевищувати швидкість, встановлену для відповідної зони.</li>
+            <li>Дотримання безпечної дистанції між автомобілями є обов'язковим.</li>
+        </ul>
+    </section>
 
-    let foundPlayer = null;
+    <section id="signs" class="rules">
+        <h2>Дорожні знаки</h2>
+        <ul>
+            <li>Попереджувальні знаки (наприклад, "Обережно! Поворот").</li>
+            <li>Заборонні знаки ("Рух заборонено", "Стоянка заборонена").</li>
+            <li>Наказові знаки ("Рух тільки прямо", "Об'їзд").</li>
+            <li>Інформаційні знаки ("Паркінг", "Заправна станція").</li>
+            <li>Світлофорна сигналізація та правила її використання.</li>
+        </ul>
+    </section>
 
-    for (let player in players) {
-        if (player.toLowerCase() === username) { 
-            foundPlayer = players[player];
-            break;
-        }
-    }
+    <section id="penalties" class="rules">
+        <h2>Порушення та штрафи</h2>
+        <ul>
+            <li>Перевищення швидкості – штраф від 4000 грн. тіки адміністратор може видати штраф!</li>
+            <li>Проїзд на червоне світло – штраф 4000 грн.</li>
+            <li>Керування без посвідчення водія – штраф 3400 грн.</li>
+            <li>Паркування у забороненому місці – штраф від 5000 грн.</li>
+            <li>Керування у стані алкогольного сп’яніння – штраф 8000 грн + позбавлення прав.</li>
+        </ul>
+    </section>
+</div>
 
-    if (foundPlayer) {
-        const currentDate = new Date();
-        const expiryDate = new Date(foundPlayer.licenseExpiry.split('.').reverse().join('-')); 
-        const isActive = currentDate <= expiryDate;
-
-        resultDiv.innerHTML = `<p><i>Ліцензію виявлено..</i></p>`;
-        resultDiv.style.display = 'block';
-
-        if (isActive) {
-    resultDiv.innerHTML = `
-        <h2>ІНФОРМАЦІЯ ПРО ЛІЦЕНЗІЮ
-        <br><small>СТАТУС:</small> <strong><small>ДІЙСНА</strong></small> </h2>
-        <p>Username: <strong>${username}</strong></p>
-        <p>Telegram: <strong>${foundPlayer.telegramId}</strong></p>
-        <p>Термін: <strong>до ${foundPlayer.licenseExpiry}</strong></p>
-        <p>Роль: <strong>${foundPlayer.workplace}</strong></p>
-    `;
-} else {
-    resultDiv.innerHTML = `
-        <h2>ІНФОРМАЦІЯ ПРО ЛІЦЕНЗІЮ
-        <br><small>СТАТУС:</small> <strong><small>НЕАКТИВНА</strong></small></h2>
-        <p><b>Для поновлення зв'яжіться з адміністратором.</b></p>
-        <p>Username: <strong>${username}</strong></p>
-        <p>Telegram: <strong>${foundPlayer.telegramId}</strong></p>
-        <p>Роль: <strong>${foundPlayer.workplace}</strong></p>
-    `;
-}
-
-    } else {
-        resultDiv.innerHTML = `<p class="error">У <strong>${username}</strong> ліцензія відсутня.</p>`;
-        resultDiv.style.display = 'block';
-    }
-}
-
-
-        function clearResults() {
-    document.getElementById('result').style.display = 'none';
-        }
-    </script>
-<p></p>
-           <div class="footer" style="text-align: center; margin-top: 40px; padding: 20px; background: #29293d; border-radius: 10px;">
-            <p style="color: #fff; font-size: 14px;">
-                Власники ліцензії на зброю не можуть використовувати зброю для агресії або нападу на інших гравців, за винятком самооборони або для захисту інших осіб від реальної загрози їхньому життю чи здоров'ю. Усі випадки використання зброї мають бути законними та виправданими. Використання зброї для скоєння злочинів або провокацій суворо заборонено. Покарання за недотримання вимог - конфіскація ліцензії та штраф розміром 7 000€.
-            </p>
-            <p style="color: #b399ff; font-size: 14px;">© 2025 Kiev RP. Всі права захищені.</p>
-        </div>
+<footer>
+    <p>© 2025 Kiev RP. Всі права захищено.</p>
+</footer>
 
 </body>
 </html>
