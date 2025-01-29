@@ -1,115 +1,155 @@
 <!DOCTYPE html>
 <html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Плани математики: Логіка</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        header {
-            background-color: #28a745;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-        }
-        header p {
-            margin: 10px 0 0;
-            font-size: 1.2rem;
-        }
-        .container {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-        h2 {
-            color: #28a745;
-        }
-        .program ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        .program ul li {
-            background: #e9ffe6;
-            margin: 10px 0;
-            padding: 10px;
-            border: 1px solid #28a745;
-            border-radius: 5px;
-        }
-        .contact-form input, .contact-form textarea, .contact-form button {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-        .contact-form button {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        .contact-form button:hover {
-            background-color: #218838;
-        }
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            margin-top: 20px;
-        }
-        footer p {
-            margin: 0;
-        }
-    </style>
-</head>
 <body>
-    <header>
-        <h1>Плани математики: Логіка</h1>
-        <p>Розвиток логічного мислення через математику</p>
-    </header>
-    <div class="container">
-        <section class="about">
-            <h2>Про курс</h2>
-            <p>Цей курс зосереджений на розвитку логічного мислення через вивчення математики. Ви навчитеся вирішувати задачі, аналізувати дані та розвивати структурований підхід до вирішення проблем.</p>
-        </section>
-        <section class="program">
-            <h2>План курсу</h2>
-            <ul>
-                <li><strong>Модуль 1:</strong> Основи логіки (висловлювання, істинність, таблиці істинності).</li>
-                <li><strong>Модуль 2:</strong> Логічні операції (кон'юнкція, диз'юнкція, імплікація).</li>
-                <li><strong>Модуль 3:</strong> Методи доказів (пряма, непряма, контрприклади).</li>
-                <li><strong>Модуль 4:</strong> Логіка у задачах та іграх.</li>
-                <li><strong>Модуль 5:</strong> Алгоритми та структура рішень.</li>
-                <li><strong>Модуль 6:</strong> Підсумковий проект (застосування логіки на практиці).</li>
-            </ul>
-        </section>
-        <section class="contact">
-            <h2>Контакти</h2>
-            <form class="contact-form">
-                <input type="text" placeholder="Ваше ім'я" required>
-                <input type="email" placeholder="Ваш email" required>
-                <textarea rows="5" placeholder="Ваше повідомлення"></textarea>
-                <button type="submit">Відправити</button>
-            </form>
-        </section>
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <p>Щоб дізнатися, чи є ліцензія у гравця, введіть його username в поле пошуку та натисніть «ПЕРЕВІРИТИ».</p>
+            <button onclick="closeModal()">ОК</button>
+        </div>
     </div>
-    <footer>
-        <p>© 2025 Плани математики: Логіка. Всі права захищено.</p>
-    </footer>
+    <div class="title-container" style="display: flex; justify-content: center; align-items: center; width: 100%; margin-top: 20px;">
+        <div class="title" style="font-size: 24px; color: #b399ff; font-weight: bold; margin-right: 10px;">
+            KIEV RP
+        </div>
+        <div class="buttons">
+            <a href="" target="_blank" style="margin-left: 10px; text-decoration: none; background: #6a0dad; color: #fff; padding: 8px 15px; border-radius: 5px; transition: background 0.3s;">Tiktok</a>
+            <a href="" target="_blank" style="margin-left: 10px; text-decoration: none; background: #6a0dad; color: #fff; padding: 8px 15px; border-radius: 5px; transition: background 0.3s;">Telegram</a>
+        </div>
+    </div>
+    <p>
+    
+    </p>
+    <div class="container">
+        <div class="top-bar">
+            <div class="logo">Ліцензія на вогнепальну зброю</div>
+            <div class="buttons">
+                <a href="https://t.me/weaponlicense_bot">ОТРИМАТИ</a>
+            </div>
+        </div>
+        <div class="content">
+            <h1>Перевірка Ліцензії</h1>
+            <div class="search-box">
+                <input type="text" id="username" placeholder="Введіть username гравця" oninput="clearResults()">
+                <button onclick="checkLicense()">ПЕРЕВІРИТИ</button>
+            </div>
+            <div id="result" class="license-info" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        const players = {
+            "Slava_Ykren": { licenseStatus: "Дійсна", licenseExpiry: "31.12.2025", workplace: "Засновник сервера", telegramId: "7286830883" },
+            "smol591": { licenseStatus: "Дійсна", licenseExpiry: "14.03.2025", workplace: "Мер", telegramId: "1370526859" },
+            "bodja150510": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Адміністратор сервера", telegramId: "1334371648" },
+            "K_PoPlove9473": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Адміністратор сервера", telegramId: "6014351539" },
+            "Yezh1lya": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Адміністратор сервера", telegramId: "5109532913" },
+            "Zoomsos123": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Адміністратор сервера", telegramId: "5339606531" },
+            "bratsmola": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Адміністратор сервера", telegramId: "7660823405" },
+            "olegh34": { licenseStatus: "Дійсна", licenseExpiry: "11.02.2025", workplace: "Охоронець суду", telegramId: "5007175515" },
+            "kajsfxbns": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Охоронець суду", telegramId: "8023376907" },
+            "SMAXS1313": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Суддя", telegramId: "6176705369" },
+            "Oleg1230o": { licenseStatus: "Дійсна", licenseExpiry: "13.02.2025", workplace: "Гравець", telegramId: "1608758641" },
+            "01234567890ua": { licenseStatus: "Дійсна", licenseExpiry: "18.02.2025", workplace: "Гравець", telegramId: "1028211294" },
+            "XxHA7AxX": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Суддя", telegramId: "1731530720" },
+            "Mr_Zver3000": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Суддя", telegramId: "6626655148" },
+            "MAXIM4IK12309": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Директор ДБР", telegramId: "6053516349" },
+            "Global20207": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Заступник Директора ДБР", telegramId: "1431122546" },
+            "cheater777_Yt": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник ДБР", telegramId: "5696745197" },
+            "Vaylet009": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник ДБР", telegramId: "5169521179" },
+            "Mixaul_petrovich1": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник ДБР", telegramId: "5493487232" },
+            "kingfogfok": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник ДБР", telegramId: "842515350" },
+            "arina_mike141": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник ДБР", telegramId: "7505928620" },
+            "artemMelnichenko2013": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник ДБР", telegramId: "5242336088" },
+            "Otto_octopu": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник ДБР", telegramId: "6110818100" },
+            "dannnnnnpro": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Голова СБС", telegramId: "2083562203" },
+            "Derick47846": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник СБС", telegramId: "8051973573" },
+            "difjkdjdjd": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник СБС", telegramId: "7213249534" },
+            "3cy_77781046": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник СБС", telegramId: "6370149052" },
+            "NeMo45765": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Охоронець банку", telegramId: "6002613929" },
+            "NAME_ABSOLUTE3": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Охоронець банку", telegramId: "5083373172" },
+            "eeeeyegeggegehux": { licenseStatus: "Дійсна", licenseExpiry: "20.02.2025", workplace: "Охоронець ювеліру", telegramId: "5599228299" },
+            "max12ua12": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Охоронець банку", telegramId: "7196451215" },
+            "VLAD_ERIK": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Охоронець банку", telegramId: "6938266310" },
+            "nazar1cyber2sportman": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Власник Е.С.Г «Сокіл»", telegramId: "6194910294" },
+            "evilmaka": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник Е.С.Г «Сокіл»", telegramId: "6260599741" },
+            "EH_WW1": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник Е.С.Г «Сокіл»", telegramId: "7944742105" },
+            "Sti4kyy": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник Е.С.Г «Сокіл»", telegramId: "5481499679" },
+            "firsunin2013": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник Е.С.Г «Сокіл»", telegramId: "5119828268" },
+            "Markito5518": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Працівник Е.С.Г «Сокіл»", telegramId: "6408141542" },
+            "Pit_uk": { licenseStatus: "Дійсна", licenseExpiry: "01.02.2025", workplace: "Охоронець ювеліру", telegramId: "7811050819" },
+            "pypsik_2309812": { licenseStatus: "Дійсна", licenseExpiry: "00.00.0000", workplace: "Гравець", telegramId: "6429626395" },
+            "Palamarka": { licenseStatus: "Дійсна", licenseExpiry: "23.02.2025", workplace: "Гравець", telegramId: "1902876079" },
+            "sigm4t1k": { licenseStatus: "Дійсна", licenseExpiry: "23.02.2025", workplace: "Гравець", telegramId: "5359199322" },
+        };
+
+        function checkLicense() { 
+    const username = document.getElementById('username').value.trim().toLowerCase();
+    const resultDiv = document.getElementById('result');
+    if (!username) {
+        resultDiv.innerHTML = `<p class="error">Введіть username гравця.</p>`;
+        resultDiv.style.display = 'block';
+        return;
+    }
+
+    let foundPlayer = null;
+
+    for (let player in players) {
+        if (player.toLowerCase() === username) { 
+            foundPlayer = players[player];
+            break;
+        }
+    }
+
+    if (foundPlayer) {
+        const currentDate = new Date();
+        const expiryDate = new Date(foundPlayer.licenseExpiry.split('.').reverse().join('-')); 
+        const isActive = currentDate <= expiryDate;
+
+        resultDiv.innerHTML = `<p><i>Ліцензію виявлено..</i></p>`;
+        resultDiv.style.display = 'block';
+
+        if (isActive) {
+    resultDiv.innerHTML = `
+        <h2>ІНФОРМАЦІЯ ПРО ЛІЦЕНЗІЮ
+        <br><small>СТАТУС:</small> <strong><small>ДІЙСНА</strong></small> </h2>
+        <p>Username: <strong>${username}</strong></p>
+        <p>Telegram: <strong>${foundPlayer.telegramId}</strong></p>
+        <p>Термін: <strong>до ${foundPlayer.licenseExpiry}</strong></p>
+        <p>Роль: <strong>${foundPlayer.workplace}</strong></p>
+    `;
+} else {
+    resultDiv.innerHTML = `
+        <h2>ІНФОРМАЦІЯ ПРО ЛІЦЕНЗІЮ
+        <br><small>СТАТУС:</small> <strong><small>НЕАКТИВНА</strong></small></h2>
+        <p><b>Для поновлення зв'яжіться з адміністратором.</b></p>
+        <p>Username: <strong>${username}</strong></p>
+        <p>Telegram: <strong>${foundPlayer.telegramId}</strong></p>
+        <p>Роль: <strong>${foundPlayer.workplace}</strong></p>
+    `;
+}
+
+    } else {
+        resultDiv.innerHTML = `<p class="error">У <strong>${username}</strong> ліцензія відсутня.</p>`;
+        resultDiv.style.display = 'block';
+    }
+}
+
+
+        function clearResults() {
+    document.getElementById('result').style.display = 'none';
+        }
+    </script>
+<p></p>
+           <div class="footer" style="text-align: center; margin-top: 40px; padding: 20px; background: #29293d; border-radius: 10px;">
+            <p style="color: #fff; font-size: 14px;">
+                Власники ліцензії на зброю не можуть використовувати зброю для агресії або нападу на інших гравців, за винятком самооборони або для захисту інших осіб від реальної загрози їхньому життю чи здоров'ю. Усі випадки використання зброї мають бути законними та виправданими. Використання зброї для скоєння злочинів або провокацій суворо заборонено. Покарання за недотримання вимог - конфіскація ліцензії та штраф розміром 7 000€.
+            </p>
+            <p style="color: #b399ff; font-size: 14px;">© 2025 Kiev RP. Всі права захищені.</p>
+        </div>
+
 </body>
 </html>
